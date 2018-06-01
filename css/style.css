@@ -1,0 +1,43 @@
+body{
+    background: lightslategray;
+    margin:0;
+    background-image: url("http://incabizgrowth.com/wp-content/uploads/2018/05/business-5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
+}
+h1,h2,h3{
+    text-decoration: underline;
+}
+header{
+    text-align:center;
+    background-image: url("https://i.pinimg.com/originals/40/eb/09/40eb09172a4044719d83533a6613bd69.jpg");
+    background-position: 50% 50%;
+    background-size: 3%;
+    background-repeat: no-repeat;
+}
+
+li{
+    list-style-type: none;
+}
+table{
+    width:400px;
+    margin:auto;
+    border: 1px solid #a9a9a9;
+    text-align:center;
+}
+td, th{
+    border:1px solid #a9a9a9;
+}
+
+.wrapper {
+    background: white;
+
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+.image-spans{
+    justify-content: center;
+}
