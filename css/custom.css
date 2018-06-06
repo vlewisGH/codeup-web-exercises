@@ -1,0 +1,9 @@
+nav a{
+    display:block;
+}
+nav a:hover{
+    background: darkgrey;
+}
+.jumbotron{
+    background-image: url("http://java.codeup.com/examples/bootstrap/pizza.png");
+}
