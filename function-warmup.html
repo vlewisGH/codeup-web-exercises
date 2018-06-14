@@ -11,14 +11,25 @@
     <title></title>
 </head>
 <body>
-    <h1 id="username"></h1>
-
+    <div>
+        <label for="first_name">Please enter your first name:</label>
+        <input id="first_name" type="text"><br><br>
+        <label for="first_name">Please enter your age:</label>
+        <input id="user_age" type="text"><br><br>
+        <button id="username_maker">Click Me</button>
+        <br>
+        <p>Your username is:</p>
+        <h1 id="username"></h1>
+    </div>
     <script>
         var makeUsername = function(firstName,age){
-            var username = ((firstName.length)+(firstName.substring(0,1))+age);
+            var username = ((firstName.length)+(firstName.substring(0,1).toLocaleLowerCase())+age);
             return username;
         };
-        $('#username').text(makeUsername('Vincent',32));
+        $('#username_maker').click(function(){
+            $('#username').text(makeUsername($('#first_name').val(),$('#user_age').val()));
+        });
+
     </script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
