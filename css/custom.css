@@ -1,9 +1,55 @@
+*{
+    box-sizing: border-box;
+}
+ul{
+    list-style-type: none;
+}
 nav a{
     display:block;
 }
 nav a:hover{
     background: darkgrey;
 }
+.container{
+    background: white;
+}
 .jumbotron{
     background-image: url("http://java.codeup.com/examples/bootstrap/pizza.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.center-me{
+    position:relative;
+}
+.transparancy{
+    opacity: 0.5;
+}
+.card label{
+    margin-left: 1em;
+}
+.card input{
+    margin-top: 3px;
+}
+.buffer{
+    width: 10px;
+}
+.card li {
+    border-top: 1px solid lightgray;
+}
+.opt_div{
+    /*width:95%;*/
+    border: 1px solid lightgray;
+    margin: 10px;
+    padding: 0 10px;
+}
+.opt_div input, select{
+    margin-left:10px;
+}
+.spacer{
+    margin:5px;
+}
+.div_cir{
+    width 10px;
+    height: 10px;
+    border
 }

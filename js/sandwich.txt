@@ -1,0 +1,32 @@
+gather ingredients
+    go to the pantry
+        open pantry
+        get bread
+        get peanut butter
+        close pantry
+    go to fridge
+        open fridge
+        get jelly
+        close fridge
+place ingredients on counter
+
+gather plate and utensils
+    go to silverware drawer
+        open silverware drawer
+        pick up knife by handle !important
+        place knife on counter
+    close silverware drawer
+
+    go to cupboard
+        open cupboard
+        get plate
+        close cupboard
+    place on counter
+
+open bread container/bag
+remove two slices of bread
+place bread on plate
+
+
+
+

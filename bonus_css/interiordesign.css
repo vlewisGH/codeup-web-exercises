@@ -1,0 +1,126 @@
+li{
+    list-style-type: none;
+}
+aside{
+    grid-area: menu;
+    width: 300px;
+    background: red;
+    color: white;
+}
+main{
+    grid-area: main;
+
+}
+main div{
+    border: 1px solid red;
+}
+
+.container{
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'menu main main'
+        'menu footer footer';
+    grid-gap: 10px;
+    overflow: hidden;
+}
+.gallery{
+    border: 1px solid green;
+}
+.gallery ul{
+    margin:0;
+    padding: 0;
+}
+.gallery li{
+    width: 49.5%;
+    float: left;
+}
+.gallery li:nth-of-type(odd){
+    margin-right:1%;
+}
+
+.gallery img{
+    width: 100%;
+    opacity: 0.8;
+
+}
+.gallery img:hover{
+    opacity: 1;
+    cursor: crosshair;
+}
+.section_head{
+    clear:both;
+    color: red;
+    font-size: 2em;
+}
+.section_head hr{
+
+}
+.bio_pic{
+    width: 32.5%;
+    background: lightgray;
+    /*margin:5px;*/
+    /*float: left;*/
+}
+.bio_pic img{
+    width: 100%
+}
+
+.bio_gallery{
+    display: flex;
+    justify-content: space-between;
+}
+.packages{
+    display: flex;
+    justify-content: space-between;
+}
+.packages button{
+    padding:10px;
+    border-radius: 5px;
+}
+.packages table{
+    width: 49%;
+    /*float: left;*/
+    text-align: center;
+    border-collapse: collapse;
+}
+/*.packages table:nth-of-type(odd){*/
+    /*margin-right: 0.5%;*/
+/*}*/
+/*.packages table:nth-of-type(even){*/
+    /*margin-left: 0.5%;*/
+/*}*/
+.packages th{
+    border: 1px solid #000;
+    color: white;
+    padding: 10px 0;
+}
+
+.packages td{
+    border: 1px solid #000;
+    background: lightgray;
+    padding: 10px 0;
+}
+.packages tr{
+    margin: 0;
+}
+.table1 th{
+    background: darkgrey;
+}
+.table2 th{
+    background:red;
+}
+.table2 button{
+    background: red;
+    color: white;
+}
+.form_div input{
+    width:99%;
+}
+.form_div button{
+    width: 100%;
+    padding: 2px;
+    border-radius: 0;
+    background: red;
+    color: white;
+}

@@ -1,0 +1,38 @@
+
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Ubuntu, sans-serif;
+    --bg-info: rgb(206,223,254);
+    --text-info: darkblue;
+    --bg-sucess: rgb(208,242,219);
+    --text-sucess: darkgreen;
+    --bg-warning: rgb(242,250,203);
+    --text-warning: darkgoldenrod;
+    --bg-error: rgb(249,211,215);
+    --text-error: darkred;
+}
+.message{
+    width:80%;
+    border-radius: 5px;
+    padding:.2em;
+    margin: 5px;
+}
+.message-info{
+    background:var(--bg-info) ;
+    color: var(--text-info)
+}
+.message-success{
+    background: var(--bg-sucess);
+    color: var(--text-sucess);
+}
+.message-warning{
+    background: var(--bg-warning);
+    color:var(--text-warning);
+}
+.message-error{
+    background: var(--bg-error);
+    color:var(--text-error);
+}
