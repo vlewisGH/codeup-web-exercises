@@ -11,6 +11,16 @@
      *  > console.log(person.firstName) // "Rick"
      *  > console.log(person.lastName) // "Sanchez"
      */
+    function human(firstName,lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sayHello = function(){
+            return ('Hello from '+this.firstName+' '+this.lastName );
+        };
+    }
+
+    var person = new human("Vincent","Lewis");
+
 
     /**
      * TODO:
@@ -21,7 +31,7 @@
      * Example
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
-
+        console.log(person.sayHello());
     /** TODO:
      * HEB has an offer for the shoppers that buy products amounting to
      * more than $200. If a shopper spends more than $200, they get a 12%
@@ -35,12 +45,26 @@
      * represents one shopper. Use a foreach loop to iterate through the array,
      * and console.log the relevant messages for each person
      */
+    function qualifier(amtSpent){
+        return((amtSpent >=200)? true:false);
+    }
+    function discounter(amtSpent){
+        return (amtSpent - amtSpent* 0.12);
+    }
 
-    // var shoppers = [
-    //     {name: 'Cameron', amount: 180},
-    //     {name: 'Ryan', amount: 250},
-    //     {name: 'George', amount: 320}
-    // ];
+    var shoppers = [
+        {name: 'Cameron', amount: 180},
+        {name: 'Ryan', amount: 250},
+        {name: 'George', amount: 320}
+    ];
+
+    console.log(shoppers[1].name);
+
+
+    shoppers.forEach(function(shopper){
+        console.log(shopper.name +' '+shopper.amount);
+        console.log(qualifier(shopper.amount)?(shopper.name+' your total is: $'+ discounter(shopper.amount)):('sorry, no discount today '+ shopper.name+', your total is:'+shopper.amount));
+        });
 
     /** TODO:
      * Create an array of objects that represent books and store it in a
@@ -54,6 +78,45 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
+    var books=[
+        {
+            title: "The count of Monte Cristo",
+            author: {
+                firstName: "Alexandre",
+                lastName: "Dumas"
+            }
+        },
+        {
+            title: "The Three Musketeers",
+            author: {
+                firstName: "Alexander",
+                lastName: "Dumas"
+            }
+        },
+        {
+            title: "The Chrysalids",
+            author: {
+                firstName: "John",
+                lastName: "Wyndam"
+            }
+        },
+        {
+            title: "Orthello",
+            author: {
+                firstName: "William",
+                lastName: "Shakespeare"
+            }
+        },
+        {
+            title: "On Liberty",
+            author: {
+                firstName: "John",
+                lastName: "Mills"
+            }
+        }
+
+    ];
+
 
     /**
      * TODO:
@@ -79,7 +142,31 @@
      *      ---
      *      ...
      */
+     function showbooks() {
+        books.forEach(function (book, index) {
+            return ('Book' + (index + 1) + '\n Title: ' + book.title + '\n Author: ' + book.author.firstName + ' ' + book.author.lastName);
+        });
+    }
 
+    function createBook(title,firstName,lastName){
+        var newBook={
+            title: title,
+            Author: {
+                firstName: firstName,
+                lastName: lastName
+            }
+        }
+        return newBook;
+    }
+    function addBook(){
+         var confirmation = true;
+         do{
+             if (confirm("") )
+         }while(confirmation === true)
+    }
+         books.push(createBook('Harry Potter','J.K','Rowland'));
+
+    showbooks(books);
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author

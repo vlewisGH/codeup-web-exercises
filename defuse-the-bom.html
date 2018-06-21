@@ -16,7 +16,7 @@
     var detonationTimer = 5;
 
     // TODO: This function needs to be called once every second
-    var defuseIt = setInterval(
+
     function updateTimer() {
         if (detonationTimer == 0) {
             alert('EXTERMINATE!');
@@ -26,7 +26,8 @@
         }
 
         detonationTimer--;
-    },1000);
+    }
+    var defuseIt = setInterval(updateTimer,1000);
 
     // TODO: When this function runs, it needs to
     // cancel the interval/timeout for updateTimer()

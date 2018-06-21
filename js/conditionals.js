@@ -16,6 +16,34 @@
  * Can you refactor your code to use functions?
  */
 
+var isOdd = function(input){
+    return ((input%2) !== 0);
+}
+var isPos = function(input){
+    return (input > 0);
+};
+var somebodyStopMe = function(){
+    alert('goodbye');
+    stopper = false;
+};
+
+var userInteract = function(){
+    var userNumber = prompt('please enter a number:');
+    if(isNaN(userNumber)){
+        alert('that is not a number');
+        return;
+    }
+    alert(isOdd(userNumber)? userNumber+' is an odd number': userNumber+' is an even number');
+    alert(isPos(userNumber)? userNumber+' is a positive number': userNumber+' is a negative number');
+    alert(parseInt(userNumber) + 100);
+};
+
+do{
+    var stopper = true;
+    confirm('would you like to enter a number?') ? userInteract():somebodyStopMe();
+}while(stopper === true );
+
+
 /* ########################################################################## */
 
 /**
@@ -43,16 +71,64 @@
 //                  will contain a different color everytime the page loads)
 var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+var analyzeColor =function(color){
+    if (color === 'red'){
+        return 'red is the color of apples';
+    }else if (color === 'orange') {
+        return 'orange is the color of his shirt';
+    }else if (color === 'yellow') {
+        return 'yellow is the color of bananas';
+    }else if (color === 'green') {
+        return 'green is the color of grass';
+    }else if (color === 'blue') {
+        return 'blue is the color of the noon sky';
+    }else if (color === 'indigo') {
+        return 'indigo is the color of night sky';
+    }else if (color === 'violet') {
+        return 'violet is the color of eggplants';
+    }else{
+        return 'I dont know anything about '+ color;
+    }
+}
 /**
  * TODO:
  * Pass the `randomColor` variable to your function and console.log the results.
  * You should see a different message everytime you refresh the page
  */
-
+console.log(analyzeColor(randomColor));
 /**
  * TODO:
  * Refactor your above function to use a switch-case statement
  */
+var analyzeColor2 = function(color){
+   switch(color){
+       case 'red':
+           return'red is the color of apples';
+           break;
+       case 'orange':
+            return 'orange is the color of his shirt';
+            break;
+       case 'yellow':
+           return 'yellow is the color of bananas';
+           break;
+       case 'green':
+            return 'green is the color of grass';
+            break;
+       case 'blue':
+            return 'blue is the color of the noon sky';
+            break;
+       case 'indigo':
+            return 'indigo is the color of night sky';
+            break;
+       case 'violet':
+            return 'violet is the color of grapes';
+            break;
+        default:
+            return 'I dont know anything about '+ color;
+            break;
+    }
+}
 
 /**
  * TODO:
@@ -60,7 +136,13 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * user to your `analyzeColor` function. Alert the return value from your
  * function to show it to the user.
  */
+// var promptInput = prompt('what color would you like to analyze?');
+// alert(analyzeColor2(promptInput));
 
+$('.color_selector').click(function(){
+    var newColor = analyzeColor2($(this).text());
+    $('#color_result').text(newColor);
+});
 /* ########################################################################## */
 
 /**
@@ -83,6 +165,40 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * return value.
  */
 
+function discountConverter(randomNum){
+
+    switch(randomNum){
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return 0.10;
+            break;
+        case 2:
+            return 0.25;
+            break;
+        case 3:
+            return 0.35;
+            break;
+        case 4:
+            return 0.50;
+            break;
+        case 5:
+            return 0;
+            break;
+        default:
+            return 1;
+    }
+}
+var calculateTotal = function(itemPrice,randoNum){
+        return (itemPrice - (itemPrice * discountConverter(randoNum)));
+};
+console.log(calculateTotal(20,2));
+console.log(calculateTotal(10,5));
+console.log(calculateTotal(50,3));
+console.log(calculateTotal(300,4));
+
+
 /**
  * TODO:
  * Uncomment the line below to generate a random number between 0 and 6.
@@ -91,4 +207,14 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * price before the discount was, and what their price after the discount is.
  */
 // Generate a random number between 0 and 6
-// var luckyNumber = Math.floor(Math.random() * 6);
+var luckyNumber = Math.floor(Math.random() * 6);
+
+// var userNumber = prompt('what was your total?');
+function discOutput(userNumber){
+    return ('your lucky number '+luckyNumber+ '! Your original total of $' +userNumber+ ' is now: $'+ calculateTotal(userNumber,luckyNumber));
+}
+
+$('#discount_btn').click(function(){
+    var newDiscount = discOutput($('#price_input').val());
+    $('#discount_result').text(newDiscount);
+});

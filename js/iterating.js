@@ -59,5 +59,5 @@
     function grabLast(ary){
         return ary[(ary.length - 1)];
     }
-
+    console.log(grabLast(names));
 })();
