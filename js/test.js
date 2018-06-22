@@ -17,3 +17,15 @@ function jsClass(x,y,z){
 var newClass = new jsClass(1,2,3);
 
 console.log(newClass.x);
+
+
+testObj ={
+    thing: 1,
+    play: function() {
+          console.log(this.thing);
+          this.thing++;
+        }
+}
+
+var testInterval =  setInterval(testObj.play,1000);
+
