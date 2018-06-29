@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<header>
+    <meta charset="utf-8">
+    <title>Arrays</title>
+</header>
+<body>
+<h1>JQuery</h1>
+
+<input id="playInput"><button id="playButton">Click Me!</button>
+<div id="playOutput"></div>
+
+<div id="writeToMe">
+    <p class="important">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur culpa deleniti deserunt dicta, doloribus, dolorum eveniet explicabo facilis hic iste laboriosam neque omnis quas qui repellat repellendus velit.</p>
+    <p class="important">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur culpa deleniti deserunt dicta, doloribus, dolorum eveniet explicabo facilis hic iste laboriosam neque omnis quas qui repellat repellendus velit.</p>
+    <p class="important">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur culpa deleniti deserunt dicta, doloribus, dolorum eveniet explicabo facilis hic iste laboriosam neque omnis quas qui repellat repellendus velit.</p>
+    <p class="important">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur culpa deleniti deserunt dicta, doloribus, dolorum eveniet explicabo facilis hic iste laboriosam neque omnis quas qui repellat repellendus velit.</p>
+    <p class="important">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur culpa deleniti deserunt dicta, doloribus, dolorum eveniet explicabo facilis hic iste laboriosam neque omnis quas qui repellat repellendus velit.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+    $('#playButton').click(function(){
+        $('.important').children(":first-child").css("color","blue");
+    });
+</script>
+
+</body>
+</html>
