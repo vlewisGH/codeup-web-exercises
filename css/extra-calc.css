@@ -1,0 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
+div.head_room{
+    min-height: 1.5em;
+}

@@ -5,7 +5,12 @@
     <title>DOM: Query and Modify</title>
 </head>
 <body>
-
+<div>
+    <button id="task1">Let them know</button>
+    <button id="task2">Add some color</button>
+    <button id="task3">MORE COLOR!</button>
+    <button id="task4">Ok I'm done</button>
+</div>
 <h1 id="main-header">Hello World!</h1>
 <ul>
     <li data-dbid="1">Item 1</li>
@@ -28,22 +33,61 @@
 <script>
     (function() {
         "use strict";
-        // TODO: Uncomment next line and get the main header element by id
-        var mainHeader = document.getElementById('main-header');
 
-        // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool";
+        function job1() {
+            // TODO: Uncomment next line and get the main header element by id
+            var mainHeader = document.getElementById('main-header');
 
-        // TODO: Uncomment the next line and get the sub header element by id
-        var subHeader = document.getElementById('sub-header');
+            // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+            mainHeader.innerHTML = "JavaScript is Cool";
+        }
+        function job2() {
+            // TODO: Uncomment the next line and get the sub header element by id
+            var subHeader = document.getElementById('sub-header');
 
-        // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = 'blue';
+            // TODO: Set the text color of subHeader to blue
+            subHeader.style.color = 'blue';
+        }
+        function job3() {
+            // TODO: Uncomment the next line and get all list items
+            var listItems = document.getElementsByTagName('li');
 
-        // TODO: Uncomment the next line and get all list items
-        var listItems = document.getElementsByTagName('li');
+
+            // TODO: Set text color on every other list item to grey
+            // TODO: Set text color of li with dbid = 1 to blue
+            for (var i = 0; i < listItems.length; i++) {
+                if (i % 2 !== 0) {
+                    listItems[i].style.color = 'grey';
+                }
+                if(listItems[i].getAttribute('data-dbId')==="1"){
+                    listItems[i].style.color = 'blue';
+                }
+
+            }
+        }
+
+           document.addEventListener("click", function(e) {
+               console.log(e);
+           });
 
 
+           document.addEventListener("click", function(e) {
+               var red = e.screenX % 256;
+               var green = e.screenY % 256;
+               var blue = "ff";
+
+               console.log(e.screenX);
+               console.log(e.screenY);
+
+               red = red.toString(16);
+               green = green.toString(16);
+               blue = blue.toString(16);
+               document.body.style['background-color'] = "#" + red + green + blue;
+           });
+
+
+
+<<<<<<< HEAD
         // TODO: Set text color on every other list item to grey
            for(var i = 0; i < listItems.length; i++ ){
                if(i % 2 !== 0){
@@ -55,14 +99,37 @@
            }
 
         // TODO: Set text color of li with dbid = 1 to blue
+=======
+        function job4() {
+            // TODO: Uncomment the next line and get all elements with class name sub-paragraph
+            var subParagraphs = document.getElementsByClassName('sub-paragraph');
 
+          // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+            subParagraphs[0].innerHTML = '<strong>Mission Accomplished</strong>';
+        }
+>>>>>>> jquery-exercise
 
+        var domElements = {
+            btn1: document.getElementById('task1'),
+            btn2: document.getElementById('task2'),
+            btn3: document.getElementById('task3'),
+            btn4: document.getElementById('task4'),
+        }
+
+<<<<<<< HEAD
         // TODO: Uncomment the next line and get all elements with class name sub-paragraph
         var subParagraphs = document.getElementsByClassName('sub-paragraph');
 
         // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
 
         subParagraphs[0].innerHTML = 'Mission Accomplished';
+=======
+        domElements.btn1.addEventListener('click',job1);
+        domElements.btn2.addEventListener('click',job2);
+        domElements.btn3.addEventListener('click',job3);
+        domElements.btn4.addEventListener('click',job4);
+
+>>>>>>> jquery-exercise
     })();
 </script>
 </body>
