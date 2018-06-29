@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .makeRed{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yea JQuery</h1>
+    <div id="wrapper">
+
+        <p id="codeup" class="words">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maiores porro quo repellendus sequi. Amet eligendi eum,
+            exercitationem facere iusto libero magni modi officia, pariatur quos rem, repellat repudiandae suscipit?
+        </p>
+
+        <ul id="lister">
+            <li id="first" class="codeup">first</li>
+            <li id="second">second</li>
+            <li id="third" class="codeup">third</li>
+        </ul>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>
+       $('h1').click(function(){
+           $(this).css('color','red');
+       });
+       $('p').dblclick(function(){
+           $(this).css('font-size','18px');
+       });
+       $('li').hover(function(){
+           $(this).addClass('makeRed');
+       },function(){
+           $(this).removeClass('makeRed');
+       });
+    </script>
+</body>
+</html>
