@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title></title>
     <style>
+
         dt{
             font-weight: bold;
             padding: 1em;
@@ -13,7 +14,14 @@
         dt:hover{
             cursor: help;
         }
-        .invisible{
+        .container{
+            background-image:url('http://rispettoanimali.it/wp-content/uploads/2017/07/orso.png');
+            background-repeat: no-repeat;
+            background-size: 450px;
+            background-position: 80% 20%;
+
+        }
+        .hideMe{
             display:none;
         }
         .pictures{
@@ -21,7 +29,7 @@
             width: 300px;
             height: 200px;
             float:left;
-            margin: 20px;
+            margin: 10px;
             background-size: cover;
         }
         .pictures img{
@@ -40,23 +48,27 @@
 </head>
 <body>
 
+    <div class="alert alert-success" role="Alert">
+        <h1 style="display:inline-block"> Would you like to sign up for the news letter?</h1><span class="badge" style="position:absolute;top:0;right:0;padding:10px">x</span>
+    </div>
+    <div class="container">
 
     <h3>Voyageurs National Park</h3>
-    <ul>
+    <ul class="hideMe">
         <li>Located in Minnesota</li>
         <li>Established in 1975</li>
         <li>Over 50 miles of hiking trails</li>
         <li>218,200 acres</li>
     </ul>
         <h3>Yellowstone National Park</h3>
-    <ul>
+    <ul class="hideMe">
         <li>Located in Wyoming</li>
         <li>Established in 1872</li>
         <li>Home to the Old Faithful geyser</li>
         <li>2,219791 acres</li>
     </ul>
         <h3>Guadalupe Mountains National Park</h3>
-    <ul>
+    <ul class="hideMe">
         <li>Located in Texas</li>
         <li>Established in 1972</li>
         <li>The highest point in Texas</li>
@@ -64,49 +76,85 @@
     </ul>
     <button id="doThings">Click Me</button>
 
+    <!--<h2 class="hideMe">Would you like to register?</h2>-->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Join Our Family</h4>
+                </div>
+                <div class="modal-body">
+                    <h2>Would you like to register?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Register</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <h1>FAQ</h1>
     <h5>Click on each question to get an answer</h5>
     <dl>
         <dt>How many parks are there?</dt>
-        <dd class="invisible">In the National Park System, there are 407 sites covering more than 84 million acres of land.</dd>
+        <dd class="hideMe">In the National Park System, there are 407 sites covering more than 84 million acres of land.</dd>
         <dt> What kind of sites are they</dt>
-        <dd class="invisible">In the National Park System there are: 124 historical parks or sites, 78 national monuments, 59 national parks, 25 battlefields or military parks, 18 preserves, 18 recreational areas, 10 seashores, 4 parkways, 4 lakeshores and 2 reserves.</dd>
+        <dd class="hideMe">In the National Park System there are: 124 historical parks or sites, 78 national monuments, 59 national parks, 25 battlefields or military parks, 18 preserves, 18 recreational areas, 10 seashores, 4 parkways, 4 lakeshores and 2 reserves.</dd>
         <dt >How long is the Appalachian trail</dt>
-        <dd class="invisible">The Appalachian Trail is a 2,185 mile long public footpath that traverses the scenic, wooded, pastoral, wild, and culturally resonant lands of the Appalachian Mountains.</dd>
+        <dd class="hideMe">The Appalachian Trail is a 2,185 mile long public footpath that traverses the scenic, wooded, pastoral, wild, and culturally resonant lands of the Appalachian Mountains.</dd>
         <dt>How many people visit the national parks yearly?</dt>
-        <dd class="invisible">In 2014, more than 290 million people visited the National Parks.</dd>
+        <dd class="hideMe">In 2014, more than 290 million people visited the National Parks.</dd>
         <dt>How deep is America's deepest cave?</dt>
-        <dd class="invisible">The nation’s deepest cave is 1,593 ft deep in New Mexico at Carlsbad Caverns National Park.</dd>
+        <dd class="hideMe">The nation’s deepest cave is 1,593 ft deep in New Mexico at Carlsbad Caverns National Park.</dd>
         <dt >Which is the oldest national park?</dt>
-        <dd class="invisible">Originally established by Congress as Hot Springs Reservation in 1832 and later becoming a national park in 1921, Hot Springs National Park represents the oldest protected area in the National Park System</dd>
+        <dd class="hideMe">Originally established by Congress as Hot Springs Reservation in 1832 and later becoming a national park in 1921, Hot Springs National Park represents the oldest protected area in the National Park System</dd>
         <dt>What kind of animals can you find in Yosemite National Park</dt>
-        <dd class="invisible">Yosemite National Park supports more than 400 species of vertebrates including fish, amphibians, reptiles, birds, and mammals.</dd>
+        <dd class="hideMe">Yosemite National Park supports more than 400 species of vertebrates including fish, amphibians, reptiles, birds, and mammals.</dd>
         <dt>What are Yellowstone National Park's points of interest?</dt>
-        <dd class="invisible">There is 1 active volcano, thousands of petrified trees, and almost 300 waterfalls in Yellowstone National Park.</dd>
+        <dd class="hideMe">There is 1 active volcano, thousands of petrified trees, and almost 300 waterfalls in Yellowstone National Park.</dd>
         <dt>What are the largest living things in the national parks?</dt>
-        <dd class="invisible">The largest living things in the world are in National Parks: Sequoia trees and Alaskan brown bears (the world’s largest living carnivores).</dd>
+        <dd class="hideMe">The largest living things in the world are in National Parks: Sequoia trees and Alaskan brown bears (the world’s largest living carnivores).</dd>
         <dt >How many prehistoric structures can be found in the National Parks system</dt>
-        <dd class="invisible">There are 27,000 historic and prehistoric structures preserved within the National Parks System.</dd>
+        <dd class="hideMe">There are 27,000 historic and prehistoric structures preserved within the National Parks System.</dd>
     </dl>
     <div id="gallery">
         <div id="eagle" class="pictures"></div>
         <div id="bison" class="pictures"></div>
         <div id="mountain_lion" class="pictures"></div>
     </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
 
         $(function(){
+            setTimeout(function(){
+
+                $('#myModal').modal();
+
+            },8000);
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').focus()
+            });
+
             $('dt').click(function(){
-                $(this).next().toggleClass("invisible");
+                $(this).next().slideToggle("invisible");
             });
             $('#doThings').click(function(){
                 $('ul').children(":last-child").css('background','yellow');
             });
             $('h3').click(function(){
                 $(this).next().children().css('font-weight','bold');
+                $(this).next().slideToggle("invisible");
+
             });
             $('li').click(function(){
                 $(this).parent().children(":first-child").css("color","blue");
+            });
+            $('span').click(function(){
+                $(this).parent().hide();
             });
             $('#gallery div:first-child').click(function(){
 
@@ -114,8 +162,5 @@
 
         })
     </script>
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
 </body>
 </html>
