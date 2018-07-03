@@ -16,9 +16,54 @@
         .invisible{
             display:none;
         }
+        .pictures{
+            border: 5px ridge darkgoldenrod;
+            width: 300px;
+            height: 200px;
+            float:left;
+            margin: 20px;
+            background-size: cover;
+        }
+        .pictures img{
+            width:100%;
+        }
+        #eagle{
+            background-image: url("https://defenders.org/sites/default/files/styles/homepage-feature-2015/public/bald-eagle_stephen-oachs.png?itok=TbZnxOLy")
+        }
+        #bison{
+            background-image: url("https://vignette.wikia.nocookie.net/walkingwith/images/9/9a/BisonElevage.jpg/revision/latest?cb=20151120115700")
+        }
+        #mountain_lion{
+            background-image: url("https://ww2.kqed.org/wp-content/uploads/sites/10/2017/11/34177848764_4662bc88da_k-800x533.jpg")
+        }
     </style>
 </head>
 <body>
+
+
+    <h3>Voyageurs National Park</h3>
+    <ul>
+        <li>Located in Minnesota</li>
+        <li>Established in 1975</li>
+        <li>Over 50 miles of hiking trails</li>
+        <li>218,200 acres</li>
+    </ul>
+        <h3>Yellowstone National Park</h3>
+    <ul>
+        <li>Located in Wyoming</li>
+        <li>Established in 1872</li>
+        <li>Home to the Old Faithful geyser</li>
+        <li>2,219791 acres</li>
+    </ul>
+        <h3>Guadalupe Mountains National Park</h3>
+    <ul>
+        <li>Located in Texas</li>
+        <li>Established in 1972</li>
+        <li>The highest point in Texas</li>
+        <li>86,367 acres</li>
+    </ul>
+    <button id="doThings">Click Me</button>
+
     <h1>FAQ</h1>
     <h5>Click on each question to get an answer</h5>
     <dl>
@@ -43,10 +88,29 @@
         <dt >How many prehistoric structures can be found in the National Parks system</dt>
         <dd class="invisible">There are 27,000 historic and prehistoric structures preserved within the National Parks System.</dd>
     </dl>
+    <div id="gallery">
+        <div id="eagle" class="pictures"></div>
+        <div id="bison" class="pictures"></div>
+        <div id="mountain_lion" class="pictures"></div>
+    </div>
     <script>
-        $('dt').click(function(){
 
-            $(this).next().toggleClass("invisible");
+        $(function(){
+            $('dt').click(function(){
+                $(this).next().toggleClass("invisible");
+            });
+            $('#doThings').click(function(){
+                $('ul').children(":last-child").css('background','yellow');
+            });
+            $('h3').click(function(){
+                $(this).next().children().css('font-weight','bold');
+            });
+            $('li').click(function(){
+                $(this).parent().children(":first-child").css("color","blue");
+            });
+            $('#gallery div:first-child').click(function(){
+
+            })
 
         })
     </script>

@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>Arrays</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Konami</title>
     <style>
         .hideMe{
             display:none;
@@ -15,174 +15,185 @@
             font-size: 10em;
         }
         .pokeDiv{
-
+            border: 5px solid black;
+            height: 400px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
         }
         #chooseBulbasuar{
-            background-image: url('https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjOr-bW5YDcAhVQKawKHRx9AnoQjRx6BAgBEAU&url=http%3A%2F%2Fvideogames-fanon.wikia.com%2Fwiki%2FFile%3ABulbasaur_Vines.png&psig=AOvVaw3L33TA5_FRzuuSL5Ucx4En&ust=1530633860036524');
+            background-image: url("https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329");
         }
+        #chooseSquitle{
+            background-image: url("https://vignette.wikia.nocookie.net/deathbattle/images/1/1e/Squirtle_.png/revision/latest?cb=20151110214320");
+        }
+        #chooseCharmander{
+            background-image: url("https://vignette.wikia.nocookie.net/pokemon/images/4/42/Oak_Charmander.png/revision/latest?cb=20151213041602");
+        }
+
     </style>
 </head>
 <body>
-<h1>Enter the code to play my game</h1>
+    <div class="container border">
+        <h1 class="text-center border border-primary">Enter the code to play my game</h1>
 
-<div id="surprise" class="hideMe">
-    <h1>Pokemon!</h1>
-    <div id="chooseOne">
-        <h3>Choose a pokemon</h3>
-        <div class="row">
-            <div id="chooseBulbasuar" class="pokeSelector"></div>
-            <div id="chooseSquitle" class="pokeSelector"></div>
-            <div id="chooseCharmander" class="pokeSelector"></div>
+        <div id="surprise" ><!--class="hideMe"-->
+            <h1>Pokemon!</h1>
+            <div id="chooseOne">
+                <h3 >Choose a pokemon</h3>
+                <div class="row border border-primary">
+                    <div id="chooseBulbasuar" class=" pokeDiv col-3"><h1>Bulbasaur</h1></div>
+                    <div id="chooseSquitle" class="pokeDiv col-3"><h1>Squirtle</h1></div>
+                    <div id="chooseCharmander" class="pokeDiv col-3"><h1>Charmander</h1></div>
+                </div>
+            </div>
+            <div class="row hideMe">
+                <div id="myPokemon" class="pokeDiv"></div>
+                <div id="fightInfo" class="infoBox"></div>
+                <div id="opponent"  class="pokeDiv"></div>
+                <div id="controls"  class="buttonsDiv"></div>
+            </div>
         </div>
     </div>
-    <div class="row hideMe">
-        <div id="myPokemon" class="pokeDiv"></div>
-        <div id="fightInfo" class="infoBox"></div>
-        <div id="opponent"  class="pokeDiv"></div>
-        <div id="controls"  class="buttonsDiv"></div>
-    </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script>
 
-    (function() {
-    'use strict';
+        (function() {
+        'use strict';
+        // Global variables:
+            var myHp = 25;
+            var oppHp = 25;
+            var globalCounter = 0;
 
-    // Global variables:
-        var myHp = 25;
-        var oppHp = 25;
-        var globalCounter = 0;
-
-        var kCode = [
-            "ArrowUp",
-            "ArrowUp",
-            "ArrowDown",
-            "ArrowDown",
-            "ArrowLeft",
-            "ArrowRight",
-            "ArrowLeft",
-            "ArrowRight",
-            "b",
-            "a"
-        ];
-       var pokemonAry = [
-           {
-               name: 'bulbasaur',
-               type: 'grass',
-               img: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjOr-bW5YDcAhVQKawKHRx9AnoQjRx6BAgBEAU&url=http%3A%2F%2Fvideogames-fanon.wikia.com%2Fwiki%2FFile%3ABulbasaur_Vines.png&psig=AOvVaw3L33TA5_FRzuuSL5Ucx4En&ust=1530633860036524',
-               attacks:[
+            var kCode = [
+                "ArrowUp",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight",
+                "ArrowLeft",
+                "ArrowRight",
+                "b",
+                "a"
+            ];
+           var pokemonAry = [
                {
-                   name: 'tackle',
-                   attack: 5,
-                   attack_gif: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwju4qvd6oDcAhUKCKwKHfEMCBsQjRx6BAgBEAU&url=https%3A%2F%2Fwww.pinterest.co.uk%2Fpin%2F282882420323797711%2F&psig=AOvVaw1bU1jNpU0xboHOpBjzo7ZY&ust=1530635234157615'
+                   name: 'bulbasaur',
+                   type: 'grass',
+                   img: "https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329",
+                   attacks:[
+                   {
+                       name: 'tackle',
+                       attack: 5,
+                       attack_gif: ""
+                   },{
+                       name: 'vine whip',
+                       attack: 10,
+                       attack_gif:''
+                   }
+                       ],
+                   win_gif:''
                },{
-                   name: 'vine whip',
-                   attack: 10,
-                   attack_gif:''
-               }
-                   ],
-               win_gif:'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiC-OOx64DcAhUNQ60KHeCBD9EQjRx6BAgBEAU&url=http%3A%2F%2Fforum.schoolofdragons.com%2Fcontent%2Fbulba-bulbasaur&psig=AOvVaw2JK6RHiPGlDlhdnaxXshct&ust=1530635383318075'
-           },{
-               name: 'squirtle',
-               type: 'water',
-               img:'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjs59GO5oDcAhUFVa0KHSy7AvsQjRx6BAgBEAU&url=http%3A%2F%2Fdeathbattle.wikia.com%2Fwiki%2FFile%3ASquirtle_.png&psig=AOvVaw3Rurewe4xEtRZSs03ewTlb&ust=1530633949309774',
-               attacks:[
-               {
-                   name: 'tackle',
-                   attack: 5
+                   name: 'squirtle',
+                   type: 'water',
+                   img:'https://vignette.wikia.nocookie.net/deathbattle/images/1/1e/Squirtle_.png/revision/latest?cb=20151110214320',
+                   attacks:[
+                   {
+                       name: 'tackle',
+                       attack: 5
+                   },{
+                       name: 'bubble',
+                       attack: 10
+                   }
+                   ]
                },{
-                   name: 'bubble',
-                   attack: 10
+                   name: 'charmander',
+                   type: 'fire',
+                   img: 'https://vignette.wikia.nocookie.net/pokemon/images/4/42/Oak_Charmander.png/revision/latest?cb=20151213041602',
+                   attacks:[{
+                       name: 'tackle',
+                       attack: 5
+                   },{
+                       name: 'ember',
+                       attack: 10
+                   }
+                   ]
                }
-               ]
-           },{
-               name: 'charmander',
-               type: 'fire',
-               img: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3kp_C5oDcAhUDQKwKHaiHDQ0QjRx6BAgBEAU&url=http%3A%2F%2Fnintendo.wikia.com%2Fwiki%2FFile%3ACharmander.png&psig=AOvVaw3dLmBJk9oepPPv7ZfGm5pV&ust=1530634065381688',
-               attacks:[{
-                   name: 'tackle',
-                   attack: 5
-               },{
-                   name: 'ember',
-                   attack: 10
+            ];
+            var playerPokemon = {};
+            var opponentPokemon = pokemonAry[Math.floor(Math.random() * pokemonAry.length)];
+
+            $('#chooseBulbasuar')
+
+           // this function will be ran after ever attack to see if the player won or loss.
+           function checkWinLoss(){
+               if (myHp <= 0){
+                   return 'loss';
+               }else if(oppHp <= 0){
+                   return 'win';
                }
-               ]
+               return 'neither';
            }
-        ];
-        var playerPokemon = {};
-        var opponentPokemon = pokemonAry[Math.floor(Math.random() * pokemonAry.length)];
 
-        $('#chooseBulbasuar')
-
-       // this function will be ran after ever attack to see if the player won or loss.
-       function checkWinLoss(){
-           if (myHp <= 0){
-               return 'loss';
-           }else if(oppHp <= 0){
-               return 'win';
-           }
-           return 'neither';
-       }
-
-       // this function returns a modifier for the attack based on the attack's type.
-       function checkAffinity(attackType,opponent){
-           if(attackType === 'grass') {
-               switch (opponent) {
-                   case 'grass':
-                       return 1;
-                   case 'fire':
-                       return 0.5;
-                   case 'water':
-                       return 1.5;
-               }
-           }else if(attackType === 'fire'){
-                   switch(opponent){
+           // this function returns a modifier for the attack based on the attack's type.
+           function checkAffinity(attackType,opponent){
+               if(attackType === 'grass') {
+                   switch (opponent) {
                        case 'grass':
-                           return 1.5;
-                       case 'fire':
                            return 1;
-                       case 'water':
+                       case 'fire':
                            return 0.5;
-                    }
-           }else if(attackType === 'water') {
-               switch (opponent) {
-                   case 'grass':
-                       return 1;
-                   case 'fire':
-                       return 0.5;
-                   case 'water':
-                       return 1.5;
+                       case 'water':
+                           return 1.5;
+                   }
+               }else if(attackType === 'fire'){
+                       switch(opponent){
+                           case 'grass':
+                               return 1.5;
+                           case 'fire':
+                               return 1;
+                           case 'water':
+                               return 0.5;
+                        }
+               }else if(attackType === 'water') {
+                   switch (opponent) {
+                       case 'grass':
+                           return 1;
+                       case 'fire':
+                           return 0.5;
+                       case 'water':
+                           return 1.5;
+                   }
                }
            }
-       }
-       function attack(){
+           function attack(){
 
-       }
+           }
 
 
-        function konami(keyInput) {
-            if (keyInput === kCode[globalCounter]) {
-                globalCounter++;
-                if (globalCounter === 10) {
-                    console.log('success');
-                    $('#surprise').removeClass('hideMe');
+            function konami(keyInput) {
+                if (keyInput === kCode[globalCounter]) {
+                    globalCounter++;
+                    if (globalCounter === 10) {
+                        console.log('success');
+                        $('#surprise').removeClass('hideMe');
+                    }
+                } else {
+                    globalCounter = 0;
                 }
-            } else {
-                globalCounter = 0;
             }
-        }
 
-        $(document).keyup(function (e) {
-            console.log(e.key);
-            console.log('global counter: ' + globalCounter);
-            konami(e.key);
-        });
-    })();
+            $(document).keyup(function (e) {
+                console.log(e.key);
+                console.log('global counter: ' + globalCounter);
+                konami(e.key);
+            });
+        })();
 
-</script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </script>
+
 </body>
 </html>
