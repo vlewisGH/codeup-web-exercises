@@ -21,6 +21,10 @@
             background-repeat: no-repeat;
             background-position: 50% 50%;
         }
+        .pokeDiv:hover{
+            border: 5px solid red;
+        }
+
         #chooseBulbasuar{
             background-image: url("https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329");
         }
@@ -28,30 +32,30 @@
             background-image: url("https://vignette.wikia.nocookie.net/deathbattle/images/1/1e/Squirtle_.png/revision/latest?cb=20151110214320");
         }
         #chooseCharmander{
-            background-image: url("https://vignette.wikia.nocookie.net/pokemon/images/4/42/Oak_Charmander.png/revision/latest?cb=20151213041602");
+            background-image: url("https://pre00.deviantart.net/1dea/th/pre/i/2016/145/a/5/charmander___lanzallamas_by_uraharataichou-da3qkwi.png");
         }
 
     </style>
 </head>
 <body>
-    <div class="container border">
-        <h1 class="text-center border border-primary">Enter the code to play my game</h1>
+    <div class="container">
+        <h1 class="text-center">Enter the code to play my game</h1>
 
         <div id="surprise" ><!--class="hideMe"-->
-            <h1>Pokemon!</h1>
-            <div id="chooseOne">
-                <h3 >Choose a pokemon</h3>
-                <div class="row border border-primary">
-                    <div id="chooseBulbasuar" class=" pokeDiv col-3"><h1>Bulbasaur</h1></div>
-                    <div id="chooseSquitle" class="pokeDiv col-3"><h1>Squirtle</h1></div>
-                    <div id="chooseCharmander" class="pokeDiv col-3"><h1>Charmander</h1></div>
+            <h1 class="text-center">Pokemon!</h1>
+
+                <div id="chooseOne" class="row d-flex justify-content-between mt-5">
+                    <h2 class="col-12 text-center mb-4">Choose a pokemon</h2>
+                    <div id="chooseBulbasuar" class="pokeDiv myChoice col-3"><h1>Bulbasaur</h1></div>
+                    <div id="chooseSquitle" class="pokeDiv myChoice col-3"><h1>Squirtle</h1></div>
+                    <div id="chooseCharmander" class="pokeDiv myChoice col-3"><h1>Charmander</h1></div>
                 </div>
             </div>
-            <div class="row hideMe">
-                <div id="myPokemon" class="pokeDiv"></div>
-                <div id="fightInfo" class="infoBox"></div>
-                <div id="opponent"  class="pokeDiv"></div>
-                <div id="controls"  class="buttonsDiv"></div>
+            <div id="playDiv" class="row hideMe">
+                <div id="myPokemon" class="border"></div>
+                <div id="fightInfo" class="border"></div>
+                <div id="opponent" class="border"></div>
+                <div id="controls" class="border"></div>
             </div>
         </div>
     </div>
@@ -79,54 +83,42 @@
                 "b",
                 "a"
             ];
-           var pokemonAry = [
-               {
-                   name: 'bulbasaur',
-                   type: 'grass',
-                   img: "https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329",
-                   attacks:[
-                   {
-                       name: 'tackle',
-                       attack: 5,
-                       attack_gif: ""
-                   },{
-                       name: 'vine whip',
-                       attack: 10,
-                       attack_gif:''
-                   }
-                       ],
-                   win_gif:''
-               },{
-                   name: 'squirtle',
-                   type: 'water',
-                   img:'https://vignette.wikia.nocookie.net/deathbattle/images/1/1e/Squirtle_.png/revision/latest?cb=20151110214320',
-                   attacks:[
-                   {
-                       name: 'tackle',
-                       attack: 5
-                   },{
-                       name: 'bubble',
-                       attack: 10
-                   }
-                   ]
-               },{
-                   name: 'charmander',
-                   type: 'fire',
-                   img: 'https://vignette.wikia.nocookie.net/pokemon/images/4/42/Oak_Charmander.png/revision/latest?cb=20151213041602',
-                   attacks:[{
-                       name: 'tackle',
-                       attack: 5
-                   },{
-                       name: 'ember',
-                       attack: 10
-                   }
-                   ]
-               }
-            ];
+            function makePokemon(pokeType,img,attacks){
+                this.pokeType = pokeType;
+                this.img = img;
+                this.attacks = attacks;
+            }
+
+            function makeAttacks(attackName,attackType,attackHit){
+                this.attackName = attackName;
+                this.attackType = attackType;
+                this.attackHit = attackHit;
+            }
+
+            var tackleAtk = new makeAttacks('tackle','normal',5);
+            var vineWhipAtk = new makeAttacks('vine whip','grass',10);
+            var bubbleAtk = new makeAttacks('bubble','water',12);
+            var headbuttAtk = new makeAttacks('headbutt','normal',8);
+            var scratchAtk = new makeAttacks('scratch','normal',4);
+            var emberAtk = new makeAttacks('ember','fire',15);
+
+            var pokemonAry = [];
+
+            pokemonAry["bulbasaur"] = new makePokemon('grass',"https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329",[headbuttAtk,vineWhipAtk]);
+            pokemonAry["squirtle"] = new makePokemon('water',"https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329",[tackleAtk,bubbleAtk]);
+            pokemonAry["charmander"] = new makePokemon('fire',"https://vignette.wikia.nocookie.net/videogames-fanon/images/4/44/Bulbasaur_Vines.png/revision/latest?cb=20150622002329",[scratchAtk,emberAtk]);
+
+
             var playerPokemon = {};
             var opponentPokemon = pokemonAry[Math.floor(Math.random() * pokemonAry.length)];
 
-            $('#chooseBulbasuar')
+            //this function will set the player pokemon as the one that's clicked on.
+
+            $('.myChoice').click(function(){
+                var pokeName = $(this).text().toLowerCase();
+                playerPokemon = pokemonAry[pokeName];
+                $('#playDiv').removeClass('hideMe');
+            });
 
            // this function will be ran after ever attack to see if the player won or loss.
            function checkWinLoss(){
@@ -179,7 +171,6 @@
                     globalCounter++;
                     if (globalCounter === 10) {
                         console.log('success');
-                        $('#surprise').removeClass('hideMe');
                     }
                 } else {
                     globalCounter = 0;
