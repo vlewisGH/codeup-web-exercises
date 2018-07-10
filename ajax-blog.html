@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/blog.css">
+    <title></title>
+</head>
+<body>
+    <div class="header p-3"><h1>Acme Blogs</h1></div>
+    <div class="container">
+        <div id="post" class="col-10">
+            <!--<div class="card">-->
+                <!--<div class="card-header">{{title}}</div>-->
+                <!--<div class="card-body">{{content}}</div>-->
+                    <!--<div class="card-footer d-flex justify-content-between">-->
+                        <!--<div class="col-3">{{category}}</div>-->
+                        <!--<div class="col-2">{{date}}</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+<script>
+    $.ajax('data/blog.json').done(function(data,status) {
+        data.forEach(function (post) {
+            $('#post').append('<div class="card mb-4"><div class="card-header bg-primary text-white">' + post.title +
+                '</div><div class="card-body">' + post.content +
+                '</div><div class="card-footer d-flex justify-content-between">' +
+                '<div class="col-6">' + post.categories.join(', ') +
+                '</div><div class="col-3">' + post.date + '</div></div>'
+            );
+        });
+    });
+</script>
+</body>
+</html>

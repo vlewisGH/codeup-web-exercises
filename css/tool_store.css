@@ -1,0 +1,16 @@
+table{
+    width:100%;
+    text-align: center;
+}
+.tableDiv{
+    width:100%;
+    height: 300px;
+    background: rgb(255,255,255,0.5);
+}
+
+.wrapper{
+    background-image:url('https://www.roofingcontractor.com/ext/resources/Issues/2017/March/sustainableroofing_main.jpg?1489678753');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:80vh;
+}
