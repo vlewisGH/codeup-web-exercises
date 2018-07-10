@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title></title>
+</head>
+<body>
+    <header>
+        <h1>Weather Application</h1>
+        <h3 id="city_info"></h3>
+    </header>
+    <main>
+        <div class="container">
+            <div id="weather_info" class="row">
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+        <div id="canvas"></div>
+    </main>
+    <footer>
+
+    </footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script>
+    function weatherDiv(high,low,icon,clouds,humidity,wind,pressure,target){
+            return(
+                '<div class="row"><h3>'+high+'/'+low+'</h3></div>'+
+                '<div class="row"><img src="http://openweathermap.org/img/w/'+icon+'.png"/></div>'+
+                '<div class="row"><strong>Clouds: <strong/>'+clouds+'</div>'+
+                '<div class="row"><strong>Humidity: <strong/>'+humidity+'</div>'+
+                '<div class="row"><strong>Wind: <strong/>'+pressure+'</div>'
+            );
+    }
+
+    $.get("http://api.openweathermap.org/data/2.5/weather", {
+        APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
+        id:     4726206,
+        units: "imperial"
+    }).done(function(data) {
+        // console.log(data);
+        $('#weather_info').children('div:first-child').html(weatherDiv(data.main.temp_max,data.main.temp_min,data.weather[0].icon,data.weather[0].description,data.main.humidity,data.main.pressure,data.wind.speed,data.main.pressure));
+    });
+
+    $.get("http://api.openweathermap.org/data/2.5/forecast", {
+        APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
+        id:     4726206,
+        units: "imperial"
+    }).done(function(data) {
+        var weatherAry = [data.list[8], data.list[16]];
+        weatherAry.forEach(function (data, i) {
+            $('#weather_info').children('div:nth-child(' + (i + 2) + ')').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.main.pressure, data.wind.speed, data.main.pressure));
+        });
+    });
+</script>
+</body>
+</html>
