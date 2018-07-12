@@ -5,60 +5,198 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <title></title>
+    <style>
+        body{
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        main{
+            background: rgb(255,255,255,0.7);
+        }
+        /*header{*/
+            /*height: 150px;*/
+            /*overflow: hidden;*/
+        /*}*/
+        #header_info{
+            color: white;
+            /*-webkit-text-stroke-width: 2px;*/
+            /*-webkit-text-stroke-color: black;*/
+            text-shadow:
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+        }
+        /*#myVideo{*/
+            /*!*position:fixed;*!*/
+            /*!*top: 0;*!*/
+            /*width: 100%;*/
+        /*}*/
+        #weather_info{
+            /*background: rgb(255,255,255,0.7);*/
+        }
+        #map_canvas{
+            height:50vh;
+        }
+
+    </style>
 </head>
 <body>
     <header>
-        <h1>Weather Application</h1>
-        <h3 id="city_info"></h3>
+        <!--<video autoplay muted loop id="myVideo">-->
+            <!--<source src="photos/Sky.mp4" type="video/mp4">-->
+        <!--</video>-->
+        <div class="row" id="header_info">
+            <div class="col-4 ml-3">
+                <h1>Weather Application</h1>
+                <h3 id="city_info"></h3>
+            </div>
+            <!--<div class="col-8 mt-2 text-right">-->
+                <!--Latitude:<input type="text" id="latitude_txt" class="ml-1 pl-2">-->
+                <!--Longitude:<input type="text" id="longitude_txt" class="ml-1 pl-2">-->
+                <!--<button id="search_btn">Search</button>-->
+            <!--</div>-->
+        </div>
     </header>
-    <main>
+    <main class="pb-5">
         <div class="container">
-            <div id="weather_info" class="row">
+            <div id="weather_info" class="row mb-3">
                 <div class="col-4"></div>
                 <div class="col-4"></div>
                 <div class="col-4"></div>
             </div>
+            <div id="map_canvas"></div>
         </div>
-        <div id="canvas"></div>
+
     </main>
     <footer>
 
     </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
-<script>
-    function weatherDiv(high,low,icon,clouds,humidity,wind,pressure,target){
-            return(
-                '<div class="row"><h3>'+high+'/'+low+'</h3></div>'+
-                '<div class="row"><img src="http://openweathermap.org/img/w/'+icon+'.png"/></div>'+
-                '<div class="row"><strong>Clouds: <strong/>'+clouds+'</div>'+
-                '<div class="row"><strong>Humidity: <strong/>'+humidity+'</div>'+
-                '<div class="row"><strong>Wind: <strong/>'+pressure+'</div>'
-            );
-    }
+    <script>
+        var map;
+        var service;
+        var marker;
 
-    $.get("http://api.openweathermap.org/data/2.5/weather", {
-        APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
-        id:     4726206,
-        units: "imperial"
-    }).done(function(data) {
-        // console.log(data);
-        $('#weather_info').children('div:first-child').html(weatherDiv(data.main.temp_max,data.main.temp_min,data.weather[0].icon,data.weather[0].description,data.main.humidity,data.main.pressure,data.wind.speed,data.main.pressure));
-    });
+        function initMap(){
+            var geocoder =  new google.maps.Geocoder();
+            // geocoder.geocode({"address":"San antonio,tx"},function(results,status){
+            //     if (status == google.maps.GeocoderStatus.OK) {
+            //
+            //         // Recenter the map over the address
+            //         latitude = results[0].geometry.location.lat();
+            //         longitude = results[0].geometry.location.lng();
+            //         map.setCenter(results[0].geometry.location);
+            //         console.log(results[0]);
+            //     } else {
+            //
+            //         // Show an error message with the status if our request fails
+            //         alert("Geocoding was not successful - STATUS: " + status);
+            //     }
+            // });
+            var mapCity = new google.maps.LatLng(latitude,longitude);
+            map = new google.maps.Map(document.getElementById('map_canvas'),{
+                center: {lat: latitude, lng: longitude},
+                zoom: 5
+            });
 
-    $.get("http://api.openweathermap.org/data/2.5/forecast", {
-        APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
-        id:     4726206,
-        units: "imperial"
-    }).done(function(data) {
-        var weatherAry = [data.list[8], data.list[16]];
-        weatherAry.forEach(function (data, i) {
-            $('#weather_info').children('div:nth-child(' + (i + 2) + ')').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.main.pressure, data.wind.speed, data.main.pressure));
+
+             marker = new google.maps.Marker({
+                position: {lat: latitude,lng:longitude},
+                map: map,
+                draggable: true
+            });
+
+
+
+            var request = {
+                location: mapCity,
+                radius: '1000',
+                type: ['park']
+            };
+
+            function callback(results, status){
+                if(status == google.maps.places.PlacesServiceStatus.OK){
+                    var randoNum = Math.floor(Math.random()*(results.length-1));
+                    var randoPhoto = Math.floor(Math.random()*(results[randoNum].photos.length-1));
+                    $('body').css('background-image','url("'+results[randoNum].photos[randoPhoto].getUrl({'maxWidth': 1000})+'")');
+                    // console.log('good');
+                }else{
+                    console.log('error!');
+                }
+            }
+
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, callback);
+
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAH5JHnA07rPcDeigma9YtKX2Xxq-5Bka0&callback=initMap&libraries=places">
+    </script>
+    <!--<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAH5JHnA07rPcDeigma9YtKX2Xxq-5Bka0&libraries=places"></script>-->
+    <script>
+        var latitude = 29.3604742;
+        var longitude = -98.4791525;
+
+        function weatherDiv(high,low,icon,clouds,humidity,wind,pressure){
+                return(
+                    '<div class="row justify-content-center"><h3>'+high+'/'+low+'</h3></div>'+
+                    '<div class="row justify-content-center"><img src="http://openweathermap.org/img/w/'+icon+'.png"/></div>'+
+                    '<div class="row justify-content-center"><strong>Clouds: <strong/>'+clouds+'</div>'+
+                    '<div class="row justify-content-center"><strong>Humidity: <strong/>'+humidity+'</div>'+
+                    '<div class="row justify-content-center"><strong>Wind: <strong/>'+pressure+'</div>'
+                );
+        }
+
+        // function newLoc() {
+        //     latitude = parseFloat($('#latitude_txt').val());
+        //     longitude = parseFloat($('#longitude_txt').val());
+        //     // console.log(latitude);
+        //     // console.log(longitude);
+        // }
+
+        function getWeather() {
+            $.get("http://api.openweathermap.org/data/2.5/weather", {
+                APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
+                lat: latitude,
+                lon: longitude,
+
+                units: "imperial"
+            }).done(function (data) {
+                // console.log(data);
+                $('#weather_info').children('div:first-child').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.main.pressure, data.wind.speed, data.main.pressure));
+                $('#city_info').text(data.name);
+                mapCity = data.name;
+            });
+
+            $.get("http://api.openweathermap.org/data/2.5/forecast", {
+                APPID: "f7d1ace2c5e96efa0b148c8f7458af5b",
+                lat: latitude,
+                lon: longitude,
+                units: "imperial"
+            }).done(function (data) {
+                var weatherAry = [data.list[8], data.list[16]];
+                weatherAry.forEach(function (data, i) {
+                    $('#weather_info').children('div:nth-child(' + (i + 2) + ')').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.main.pressure, data.wind.speed, data.main.pressure));
+                });
+
+            }).fail(function(){});
+        }
+        $(document).ready(getWeather);
+        $('#map_canvas').on("mouseup",function(){
+            // newLoc();
+            latitude = marker.position.lat();
+            longitude = marker.position.lng();
+            console.log(latitude+', '+longitude);
+;           getWeather();
+            initMap();
         });
-    });
-</script>
+    </script>
 </body>
 </html>

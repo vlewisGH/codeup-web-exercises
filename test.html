@@ -6,7 +6,7 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <title></title>
     </head>
-    <body>
+    <body id="bg">
         <h1 >Test</h1>
         <div id="testId" class="container">
             <div class="row">
@@ -25,10 +25,27 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
         <script>
-            $('.testClass').click(function(){
-                console.log('test');
-               $('#testId').css('display','none');
-            });
+            var rgb = [255,0,0];
+
+            function setContrast() {
+                rgb[0] = Math.round(Math.random() * 255);
+                rgb[1] = Math.round(Math.random() * 255);
+                rgb[2] = Math.round(Math.random() * 255);
+
+                // http://www.w3.org/TR/AERT#color-contrast
+                var o = Math.round(((parseInt(rgb[0]) * 299) +
+                    (parseInt(rgb[1]) * 587) +
+                    (parseInt(rgb[2]) * 114)) / 1000);
+                var fore = (o > 125) ? 'black' : 'white';
+                var back = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+                $('#bg').css('color', fore);
+                $('#bg').css('background-color', back);
+
+
+            }
+
+
+            $('#clickMe').click(setContrast);
         </script>
     </body>
     </html>
