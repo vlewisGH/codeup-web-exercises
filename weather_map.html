@@ -47,17 +47,48 @@
             <!--<source src="photos/Sky.mp4" type="video/mp4">-->
         <!--</video>-->
         <div class="row" id="header_info">
-            <div class="col-4 ml-3">
+            <div class="col-4 pl-3">
                 <h1>Weather Application</h1>
-                <h3 id="city_info"></h3>
+                    <h3 id="city_info"></h3>
+
             </div>
-            <!--<div class="col-8 mt-2 text-right">-->
+            <div class="col-8 mt-2 text-right">
+                <h3 id="bg_name" class="pr-3"></h3>
+                <h3 id="bg_address" class="pr-3"></h3>
+                <h3 id="bg_hours" class="pr-3"></h3>
                 <!--Latitude:<input type="text" id="latitude_txt" class="ml-1 pl-2">-->
                 <!--Longitude:<input type="text" id="longitude_txt" class="ml-1 pl-2">-->
                 <!--<button id="search_btn">Search</button>-->
-            <!--</div>-->
+            </div>
         </div>
     </header>
+    <!--<div class="modal" tabindex="-1" role="dialog">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<h5 class="modal-title">Modal title</h5>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div id="modal_image"></div>-->
+                    <!--<div class="row">-->
+                        <!--<div id="modal_name" class="col-4"></div>-->
+                        <!--<div id="modal_open" class="col-4"></div>-->
+                        <!--<div id="modal_rating" class="col-4"></div>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                        <!--<div id="modal_address"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <main class="pb-5">
         <div class="container">
             <div id="weather_info" class="row mb-3">
@@ -123,7 +154,11 @@
                 if(status == google.maps.places.PlacesServiceStatus.OK){
                     var randoNum = Math.floor(Math.random()*(results.length-1));
                     var randoPhoto = Math.floor(Math.random()*(results[randoNum].photos.length-1));
+                    console.log(results[randoNum]);
                     $('body').css('background-image','url("'+results[randoNum].photos[randoPhoto].getUrl({'maxWidth': 1000})+'")');
+                    $('#bg_name').text(results[randoNum].name);
+                    $('#bg_address').text(results[randoNum].formatted_address);
+                    $('#bg_hours').text((results[randoNum].opening_hours.open_now)?"currently open":"closed");
                     // console.log('good');
                 }else{
                     console.log('error!');
@@ -150,7 +185,8 @@
                     '<div class="row justify-content-center"><img src="http://openweathermap.org/img/w/'+icon+'.png"/></div>'+
                     '<div class="row justify-content-center"><strong>Clouds: <strong/>'+clouds+'</div>'+
                     '<div class="row justify-content-center"><strong>Humidity: <strong/>'+humidity+'</div>'+
-                    '<div class="row justify-content-center"><strong>Wind: <strong/>'+pressure+'</div>'
+                    '<div class="row justify-content-center"><strong>Wind: <strong/>'+wind+'</div>'+
+                    '<div class="row justify-content-center"><strong>Pressure: <strong/>'+pressure+'</div>'
                 );
         }
 
@@ -170,7 +206,7 @@
                 units: "imperial"
             }).done(function (data) {
                 // console.log(data);
-                $('#weather_info').children('div:first-child').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.main.pressure, data.wind.speed, data.main.pressure));
+                $('#weather_info').children('div:first-child').html(weatherDiv(data.main.temp_max, data.main.temp_min, data.weather[0].icon, data.weather[0].description, data.main.humidity, data.wind.speed, data.main.pressure);
                 $('#city_info').text(data.name);
                 mapCity = data.name;
             });
@@ -189,6 +225,11 @@
             }).fail(function(){});
         }
         $(document).ready(getWeather);
+
+        //modal variables will go here
+
+
+        //
         $('#map_canvas').on("mouseup",function(){
             // newLoc();
             latitude = marker.position.lat();
